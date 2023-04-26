@@ -27,10 +27,6 @@
   <div class="submit">
       <a href="" id="submit">Submit</a>
   </div>
-
-  <div>
-    <el-button>Click Here</el-button>
-  </div>
 </template>
 
 <style lang="scss" scoped>
@@ -91,9 +87,6 @@
     top: -12px;
     border: 0.5px solid #3c1351;
     background-color: #8312A5;
-    .input1 ::placeholder {
-      content: "Lener";
-    }
   }
 
 </style>
