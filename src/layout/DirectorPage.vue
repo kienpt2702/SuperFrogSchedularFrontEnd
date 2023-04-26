@@ -58,7 +58,7 @@ export default {
         {{ link.title }}
       </h2>
     </nav>
-    <main>
+      <main>
       <RouterView />
     </main>
   </div>
@@ -82,6 +82,7 @@ export default {
       cursor: pointer;
     }
     h1 {
+      margin-top: 15px;
       margin-bottom: 20px;
       color: #fff;
     }
