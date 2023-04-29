@@ -1,6 +1,16 @@
 <template>
   <div>
     <p id="view-requests"> Requests </p>
+
+    <label for="status-filter">Filter by status:</label>
+    <select id="status-filter" v-model="filterStatus">
+      <option value="">All</option>
+      <option value="APPROVED">Approved</option>
+      <option value="PENDING">Pending</option>
+      <option value="REJECTED">Rejected</option>
+    </select>
+
+
     <table>
       <thead>
         <tr>
@@ -30,8 +40,7 @@
 </template>
 
 
-<!-- eventually we should plan on making only requests that are Approved status visible, 
-  maybe with a button next to it instead of having the Status column, when clicked will route to vue page that will sign up a super frog for the request-->
+
 
 
 
@@ -44,7 +53,8 @@ export default {
     return {
       requests: [],
       page: 1,
-      showPrevButton:false, 
+      showPrevButton: false, 
+      filterStatus: "",
     };
   },
   mounted() {
@@ -52,20 +62,18 @@ export default {
   },
   methods: {
     getRequests() {
-     
       axios
         .get('http://localhost:8080/api/v1/requests')
         .then(response => {
-          console.log(response.data.data);
           this.requests = response.data.data;
           this.showPrevButton = false;
-         
+          this.page = 1; // Reset page when resetting filter
         })
         .catch(error => {
           console.log(error);
         });
     },
-    nextPage(){
+    nextPage() {
       this.page++;
       if (this.page === this.lastPage) { 
         this.showNextButton = false;
@@ -73,33 +81,51 @@ export default {
       if (this.page > 1) {
         this.showPrevButton = true;
       }
-      
     },
-    prevPage(){
-      
-      if(this.page>1){
+    prevPage() {
+      if (this.page > 1) {
         this.page--;
-      if(this.page === 1) {
-        this.showPrevButton=false;
-      }
-      if(!this.showPrevButton){
-        this.showNextButton=true;
-      }
+        if (this.page === 1) {
+          this.showPrevButton = false;
+        }
+        if (!this.showPrevButton) {
+          this.showNextButton = true;
+        }
       }
     }
   },
   computed: {
-    computedRequests() {
-      const startIndex = (this.page - 1)*15;
-      const endIndex = startIndex +15;
-      return this.requests.slice(startIndex,endIndex);
+    filteredRequests() {
+      let filteredRequests = this.requests;
+      if (this.filterStatus) {
+        filteredRequests = this.requests.filter(
+          (request) => request.status === this.filterStatus
+        );
+      }
+      return filteredRequests;
     },
-    lastPage(){
-      return Math.ceil(this.requests.length/15);
+    computedRequests() {
+      const startIndex = (this.page - 1) * 15;
+      const endIndex = startIndex + 15;
+
+      if (this.filteredRequests.length === 0) {
+        return [];
+      }
+
+      return this.filteredRequests.slice(startIndex, endIndex);
+    },
+    lastPage() {
+      if (this.filterStatus) {
+        return Math.ceil(this.filteredRequests.length / 15);
+      }
+      return Math.ceil(this.requests.length / 15); 
     }
   },
 };
 </script>
+
+
+
 
 <style>
 table {
@@ -146,5 +172,13 @@ button:hover {
   opacity: 0; /* Set opacity to 0 when hidden */
 }
 
+#view-requests {
+  text-align: center;
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+}
 
 </style>
+
+<!-- eventually we should plan on making only requests that are Approved status visible, 
+  maybe with a button next to it instead of having the Status, when clicked will route to vue page that will sign up a super frog for the request-->
