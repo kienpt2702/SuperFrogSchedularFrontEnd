@@ -23,10 +23,23 @@
       </div>
 
 
-      
-
       <label for="event-address">Event Address:</label>
       <input type="text" id="event-address" name="event-address">
+
+      <div class="flex-container">
+        <div class="flex-item">
+          <label for="event-city">City:</label>
+          <input type="text" id="event-city" name="event-city">
+        </div>
+        <div class="flex-item">
+          <label for="event-state">State:</label>
+          <input type="text" id="event-state" name="event-state">
+        </div>
+        <div class="flex-item">
+          <label for="event-zipcode">Zip Code:</label>
+          <input type="text" id="event-zipcode" name="event-zipcode">
+        </div>
+      </div>
 
       
   
@@ -47,10 +60,6 @@
         </div>
       </div>
   
-      
-
-      <label for="event-title">Event Mileage testing:</label>
-      <input type="text" id="event-mileage" name="event-mileage">
   
       <label for="event-description">Event Description:</label>
       <textarea id="event-description" name="event-description" rows="5" cols="40"></textarea>
@@ -97,49 +106,69 @@ import axios from "axios";
 export default {
   methods: {
     async submitForm() {
-      // get the form data
-      // const formData = new FormData(document.querySelector("form"));
+      const origin1 = 'Amon G. Carter Stadium 2850 Stadium Drive Fort Worth, TX 76109';
+      // Retrieve the values of the input fields
+      const address = document.getElementById("event-address").value;
+      const city = document.getElementById("event-city").value;
+      const state = document.getElementById("event-state").value;
+      const zipcode = document.getElementById("event-zipcode").value;
 
+      // Concatenate the values together into a single string
+      const destinationA = address + ", " + city + ", " + state + " " + zipcode;
+      const service = new google.maps.DistanceMatrixService();
 
-      const requestData = {
-        eventType: document.querySelector("#event-type").value,
-        address: document.querySelector("#event-address").value,
-        eventDate: document.querySelector("#event-date").value,
-        startTime: document.querySelector("#event-start-time").value,
-        endTime: document.querySelector("#event-end-time").value,
-        mileage: document.querySelector("#event-mileage").value,
-        eventTitle: document.querySelector("#event-title").value,
-        customerFirstName: document.querySelector("#customer-first-name").value,
-        customerLastName: document.querySelector("#customer-last-name").value,
-        customerPhoneNumber: document.querySelector("#customer-phone").value,
-        customerEmail: document.querySelector("#customer-email").value,
-        eventDescription: document.querySelector("#event-description").value,
-        status: "PENDING"
-      };
+      service.getDistanceMatrix(
+        {
+          origins: [origin1],
+          destinations: [destinationA],
+          travelMode: 'DRIVING',
+        },
+        (response, status) => {
+          if (status === 'OK') {
+            const distanceInKm = response.rows[0].elements[0].distance.value / 1000;
+            const distanceInMiles = (distanceInKm / 1.609344).toFixed(2);
+            console.log(distanceInMiles);
+            const requestData = {
+              eventType: document.querySelector("#event-type").value,
+              address: document.querySelector("#event-address").value,
+              eventDate: document.querySelector("#event-date").value,
+              startTime: document.querySelector("#event-start-time").value,
+              endTime: document.querySelector("#event-end-time").value,
+              mileage: distanceInMiles,
+              eventTitle: document.querySelector("#event-title").value,
+              customerFirstName: document.querySelector("#customer-first-name").value,
+              customerLastName: document.querySelector("#customer-last-name").value,
+              customerPhoneNumber: document.querySelector("#customer-phone").value,
+              customerEmail: document.querySelector("#customer-email").value,
+              eventDescription: document.querySelector("#event-description").value,
+              status: "PENDING"
+            };
 
-
-      try {
-        // send the form data to the API endpoint
-        console.log(requestData);
-        const response = await axios.post("http://localhost:8080/api/v1/requests", requestData);
-        
-
-        // handle the response
-        if (response.status === 200) {
-          alert("Form submitted successfully!");
-          console.log(response.data);
-        } else {
-          alert("Form submission failed.");
-          console.error(response.data);
+            // send the form data to the API endpoint
+            axios
+              .post("http://localhost:8080/api/v1/requests", requestData)
+              .then(response => {
+                if (response.status === 200) {
+                  alert("Form submitted successfully!");
+                  console.log(response.data);
+                } else {
+                  alert("Form submission failed.");
+                  console.error(response.data);
+                }
+              })
+              .catch(error => {
+                console.error(error);
+              });
+          } else {
+            console.log("Error:", status);
+          }
         }
-      } catch (error) {
-        console.error(error);
-      }
+      );
     },
   },
 };
-
 </script>
+
 
 
 
