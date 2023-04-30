@@ -19,6 +19,7 @@
           <th>Customer Name</th>
           <th>Email Address</th>
           <th>Request Status</th>
+          <th>Action</th>
           
         </tr>
       </thead>
@@ -30,6 +31,11 @@
           <td>{{ requests.customerFirstName +" "+  requests.customerLastName }}</td>
           <td>{{ requests.customerEmail }}</td>
           <td>{{ requests.status }}</td>
+          <td>
+            <button @click="approveRequests(requests)">Approve</button>
+            <button @click="rejectRequests(requests)">Reject</button>
+            <button @click="deleteRequests(requests)">Delete</button>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -70,6 +76,45 @@ export default {
           this.page = 1; // Reset page when resetting filter
         })
         .catch(error => {
+          console.log(error);
+        });
+    },
+    approveRequests(requests) {
+      axios
+        .put(`http://localhost:8080/api/v1/requests/${requests.id}/status/APPROVED`, {
+        })
+        .then((response) => {
+          this.requests = response.data.data;
+          console.log(response.data.data);
+          this.getRequests();
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    rejectRequests(requests) {
+      axios
+        .put(`http://localhost:8080/api/v1/requests/${requests.id}/status/REJECTED`, {
+        })
+        .then((response) => {
+          this.requests = response.data.data;
+          console.log(response.data.data);
+          this.getRequests();
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    deleteRequests(requests) {
+      axios
+        .delete(`http://localhost:8080/api/v1/requests/${requests.id}`, {
+        })
+        .then((response) => {
+          this.requests = response.data.data;
+          console.log(response.data.data);
+          this.getRequests();
+        })
+        .catch((error) => {
           console.log(error);
         });
     },
