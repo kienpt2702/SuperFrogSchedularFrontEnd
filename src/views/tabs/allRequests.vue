@@ -10,6 +10,12 @@
       <option value="REJECTED">Rejected</option>
     </select>
 
+    <label for="sort-order">Sort by:</label>
+    <select id="sort-order" v-model="sortOrder">
+      <option value="desc">Newest</option>
+      <option value="asc">Oldest</option>
+    </select>
+
 
     <table>
       <thead>
@@ -32,9 +38,9 @@
           <td>{{ requests.customerEmail }}</td>
           <td>{{ requests.status }}</td>
           <td>
-            <button @click="approveRequests(requests)">Approve</button>
-            <button @click="rejectRequests(requests)">Reject</button>
-            <button @click="deleteRequests(requests)">Delete</button>
+            <button @click="approveRequests(requests)" class="button2">Approve</button>
+            <button @click="rejectRequests(requests)" class="reject button2">Reject</button>
+            <button @click="deleteRequests(requests)" class="delete button2">Delete</button>
           </td>
         </tr>
       </tbody>
@@ -61,6 +67,7 @@ export default {
       page: 1,
       showPrevButton: false, 
       filterStatus: "",
+      sortOrder: "desc",
     };
   },
   mounted() {
@@ -150,20 +157,24 @@ export default {
       return filteredRequests;
     },
     computedRequests() {
-      const startIndex = (this.page - 1) * 15;
-      const endIndex = startIndex + 15;
+      let sortedRequests = this.filteredRequests.slice();
+    if (this.sortOrder === 'desc') {
+      sortedRequests.reverse();
+    }
+    const startIndex = (this.page - 1) * 5;
+    const endIndex = startIndex + 5;
+    return sortedRequests.slice(startIndex, endIndex);
 
-      if (this.filteredRequests.length === 0) {
-        return [];
-      }
+      //return this.filteredRequests.slice(startIndex, endIndex);
 
-      return this.filteredRequests.slice(startIndex, endIndex);
+      
+      
     },
     lastPage() {
       if (this.filterStatus) {
-        return Math.ceil(this.filteredRequests.length / 15);
+        return Math.ceil(this.filteredRequests.length / 5);
       }
-      return Math.ceil(this.requests.length / 15); 
+      return Math.ceil(this.requests.length / 5); 
     }
   },
 };
@@ -173,6 +184,9 @@ export default {
 
 
 <style>
+nav {
+  justify-content: unset !important;
+}
 table {
   border-collapse: collapse;
   width: 100%;
@@ -209,6 +223,15 @@ button {
   transition-duration: 0.4s;
 }
 
+.reject{
+  background-color: #e1b700; 
+}
+
+.delete{
+  background-color: #ff6f6f; 
+
+}
+
 button:hover {
   background-color: #4D1979;
 }
@@ -222,6 +245,37 @@ button:hover {
   font-size: 1.8rem;
   margin-bottom: 10px;
 }
+
+td:nth-of-type(1) {
+  max-width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+td:last-child {
+  display: flex;
+  flex-direction: column;
+}
+
+.button2 {
+  margin-bottom: 5px;
+  border: none; 
+  color: white; 
+  padding: 5px 10px; /* smaller padding */
+  text-align: center; 
+  text-decoration: none; 
+  display: inline-block; 
+  font-size: 14px; /* smaller font size */
+  margin-top: 10px;
+  margin-right: 10px;
+  cursor: pointer; 
+  transition-duration: 0.4s;
+
+  
+}
+
+
 
 </style>
 
