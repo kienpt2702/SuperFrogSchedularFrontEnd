@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "cors": "^2.8.5",
     "axios": "^1.4.0",
     "element-plus": "^2.3.4",
     "sass": "^1.62.0",
