@@ -59,8 +59,8 @@ export default {
       </h2>
     </nav>
       <main>
-      <RouterView />
-    </main>
+        <RouterView />
+      </main>
   </div>
 </template>
 
