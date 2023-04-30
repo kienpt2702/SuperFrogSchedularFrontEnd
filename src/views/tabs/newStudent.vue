@@ -65,11 +65,11 @@
 
   .input1 {
     padding: 10px;
-    background: #8312A5;
+    background: #b58dd7;
     border-radius: 5px;
     outline: none;
     color: #f5f5f5;
-    border: 1px solid #3c1351;
+    border: 2px solid #39006a;
   }
 
   .placeholder {
@@ -85,8 +85,9 @@
 
   .input1:focus + .placeholder, .input1:not(:placeholder-shown) + .placeholder {
     top: -12px;
-    border: 0.5px solid #3c1351;
-    background-color: #8312A5;
+    border: 1px solid #3c1351;
+    background-color: #b58dd7;
+    border-radius: 3px;
   }
 
 </style>
