@@ -8,7 +8,7 @@ import FrontPage from '@/layout/FrontPage.vue';
 import DirectorPage from '@/layout/DirectorPage.vue';
 
 import newStudent from '@/views/tabs/newStudent.vue';
-import allStudents from '@/views/tabs/allStudents.vue';
+import allStudents from '@/views/tabs/AllStudents.vue';
 import newRequest from '@/views/tabs/newRequest.vue';
 import allRequests from '@/views/tabs/allRequests.vue';
 import paymentReport from '@/views/tabs/Reports/paymentReport.vue';
