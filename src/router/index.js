@@ -11,6 +11,8 @@ import newStudent from '@/views/tabs/newStudent.vue';
 import allStudents from '@/views/tabs/allStudents.vue';
 import newRequest from '@/views/tabs/newRequest.vue';
 import allRequests from '@/views/tabs/allRequests.vue';
+import modifyRequest from '@/views/tabs/modifyRequest.vue';
+import signupRequest from '@/views/tabs/signupRequest.vue';
 import paymentReport from '@/views/tabs/Reports/paymentReport.vue';
 import performanceReport from '@/views/tabs/Reports/performanceReport.vue';
 import addPaymentReport from '@/views/tabs/Reports/addPaymentReport.vue';
@@ -57,6 +59,16 @@ const router = createRouter({
           path: 'allRequests',
           name: 'allRequests',
           component: allRequests,
+        },
+        {
+          path: 'modifyRequest',
+          name: 'modifyRequest',
+          component: modifyRequest,
+        },
+        {
+          path: 'signupRequest',
+          name: 'signupRequest',
+          component: signupRequest,
         },
         {
           path: 'addPaymentReport',

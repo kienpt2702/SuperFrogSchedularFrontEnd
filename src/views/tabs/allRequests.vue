@@ -16,14 +16,16 @@
       <option value="asc">Oldest</option>
     </select>
 
+    <label for="search-request-id">Search by request ID:</label>
+    <input id="search-request-id" v-model="searchRequestId">
+
 
     <table>
       <thead>
         <tr>
           <th>Event Title</th>
           <th>Event Description</th>
-          <th>Customer Name</th>
-          <th>Email Address</th>
+          <th>Customer Contact</th>
           <th>Request Status</th>
           <th>Action</th>
           
@@ -34,9 +36,12 @@
           <td>{{ requests.eventTitle }}</td>
           <td>{{ requests.eventDescription }}</td>
           <!--<td>{{ requests.id }}</td>-->
-          <td>{{ requests.customerFirstName +" "+  requests.customerLastName }}</td>
-          <td>{{ requests.customerEmail }}</td>
-          <td>{{ requests.status }}</td>
+          <td><p>{{ requests.customerFirstName +" "+  requests.customerLastName }}</p>
+              <p>{{ requests.customerEmail }}</p>
+          </td>
+          <td><p>{{ requests.status }}</p>
+              <p>{{ requests.id }}</p>
+          </td>
           <td>
             <button @click="approveRequests(requests)" class="button2">Approve</button>
             <button @click="rejectRequests(requests)" class="reject button2">Reject</button>
@@ -68,6 +73,7 @@ export default {
       showPrevButton: false, 
       filterStatus: "",
       sortOrder: "desc",
+      searchRequestId: "",
     };
   },
   mounted() {
@@ -148,14 +154,32 @@ export default {
   },
   computed: {
     filteredRequests() {
-      let filteredRequests = this.requests;
+      let filteredRequests = [];
       if (this.filterStatus) {
         filteredRequests = this.requests.filter(
           (request) => request.status === this.filterStatus
         );
+      } else {
+        filteredRequests = this.requests;
       }
+
+      if (this.searchRequestId) {
+        const searchId = this.searchRequestId;
+        filteredRequests = filteredRequests.filter(
+          (request) => request.id === searchId
+        );
+    }
+
       return filteredRequests;
     },
+    //   let filteredRequests = this.requests;
+    //   if (this.filterStatus) {
+    //     filteredRequests = this.requests.filter(
+    //       (request) => request.status === this.filterStatus
+    //     );
+    //   }
+    //   return filteredRequests;
+    // },
     computedRequests() {
       let sortedRequests = this.filteredRequests.slice();
     if (this.sortOrder === 'desc') {
@@ -209,10 +233,13 @@ tr:nth-child(even) {
 }
 
 button {
+  height: auto;
+  widows: auto;
+  margin: .2rem ;
   background-color: #4CAF50; 
   border: none; 
   color: white; 
-  padding: 10px 20px; /* Some padding */
+  padding: 10px 20px; 
   text-align: center; 
   text-decoration: none; 
   display: inline-block; 
