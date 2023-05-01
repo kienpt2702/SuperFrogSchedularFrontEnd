@@ -22,7 +22,7 @@ export default {
 <template>
   <div class="layout-member">
     <nav>
-      <div class="firstdiv">
+      <div>
         <img src="@/images/img.png" />
       </div>
       
@@ -80,10 +80,6 @@ export default {
     padding: 20px;
     grid-column: span 9;
   }
-}
-
-.firstdiv {
-  padding: 10px;
 }
 
 .backtext {
