@@ -38,7 +38,7 @@ const router = createRouter({
       component: FrontPage, // FrontOffice will be rendered in App's <vue-router />
       children: [
         // children will be rendered in Front component's <vue-router />
-        { path: 'home', name: 'home', component: Home },
+        { path: '/', name: 'home', component: Home },
         { path: 'auth/login', name: 'login', component: Login },
         { path: 'price', name: 'price', component: Price },
         { path: 'request', name: 'request', component: Request },
@@ -109,7 +109,7 @@ const router = createRouter({
       component: DirectorPageforSS, // FrontOffice will be rendered in App's <vue-router />
       children: [
         // children will be rendered in Front component's <vue-router />
-        { path: '/', name: 'viewmyrequest', component: viewSSrequest },
+        { path: 'viewmyrequest', name: 'viewmyrequest', component: viewSSrequest },
       ],
     },
     {

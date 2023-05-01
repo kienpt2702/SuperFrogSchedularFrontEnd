@@ -145,23 +145,7 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-  button {
-      margin: 30px;
-      margin-top: 150px;
-      padding: 20px;
-      width: 150px;
-      height: 100px;
-      border: none;
-      background-size: contain;
-      background-repeat: no-repeat;
-      background-position: center center;
-      color: white;
-      border-radius: 20px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-end;
+    margin-top: 100px;
   }
   .button-container {
     display: flex;

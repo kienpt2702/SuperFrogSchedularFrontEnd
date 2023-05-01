@@ -87,24 +87,25 @@ export default {
 }
 
 .backtext {
-        font-size: 15px;
-        font-weight: 200;
-    }
-    .backholder {
-        border: 1.5px solid blue;
-        border-radius: 15px;
-        background-color: ghostwhite;
-        display: grid;
-        align-items: center;
-        text-align: center;
-        width: 170px;
-        height: 50px;
-        margin: 30px;
-    }
+    font-size: 15px;
+    font-weight: 200;
+}
+.backholder {
+    border: 1.5px solid blue;
+    border-radius: 15px;
+    background-color: ghostwhite;
+    display: grid;
+    align-items: center;
+    text-align: center;
+    width: 170px;
+    height: 50px;
+    margin: 30px;
+}
 
-    .backholder:hover {
-        border: 1.5px solid orangered;
-        background-color: blueviolet;   
-        font-weight: 700;
-    }
+.backholder:hover {
+    border: 1.5px solid orangered;
+    background-color: blueviolet;   
+    font-weight: 700;
+}
 </style>
+
