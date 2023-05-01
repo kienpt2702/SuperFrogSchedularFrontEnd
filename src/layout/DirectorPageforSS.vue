@@ -1,6 +1,7 @@
 <script>
 import { RouterView } from 'vue-router';
 import { RouterLink } from 'vue-router';
+import Navbar from '@/components/Navbar.vue';
 export default {
   data() {
     return {
@@ -9,6 +10,7 @@ export default {
       ]
     };
   },
+  components: { Navbar },
   methods: {
     // simulate router-link's "to" functionality
     push(link) {
@@ -20,6 +22,7 @@ export default {
 </script>
 
 <template>
+  <Navbar class="navigation"></Navbar>
   <div class="layout-member">
     <nav>
       <div>
