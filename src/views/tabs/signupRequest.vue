@@ -44,7 +44,8 @@
   
             <td>{{ requests.status }}</td>
             <td>
-              <button @click="signupRequests(requests)">SIGN UP</button>
+              <button v-if="!requests.assignedSuperFrogStudent" @click="signupRequests(requests)">SIGN UP</button>
+              <button v-if="requests.assignedSuperFrogStudent">REASSIGN</button>
               <button class="cancel" @click="cancelRequests(requests)">CANCEL</button>
            
             </td>
@@ -125,6 +126,25 @@
             console.log(error);
           });
       },
+
+      reAssign(requests){
+        const id = document.querySelector("#superfrogid").value;
+        console.log(id);
+        axios
+          .delete(`http://localhost:8080/api/v1/requests/${requests.id}/cancel/`, {
+          })
+          .then((response) => {
+            console.log(this.superfrogid);
+            this.requests = response.data.data;
+            console.log(response.data.data);
+            this.getRequests();
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+        signupRequests(requests);
+      },
+
 
       Requests(requests) {
         axios
