@@ -23,4 +23,24 @@ const getAllUsers= async (searchParams) => {
     return res.data;
 }
 
-export {createUser, loginUser, getAllUsers}
+const updateUser = async (userId, info) => {
+    try {
+        const res = await api.put(`${endpoint}/${userId}`, info);
+
+        return res;
+    } catch (err) {
+        console.log(false)
+    }
+}
+
+const deactivateUser = async (userId) => {
+    try {
+        const res = await api.delete(`${endpoint}/${userId}`);
+
+        return res;
+    } catch (err) {
+        console.log(false)
+    }
+}
+
+export {createUser, loginUser, getAllUsers, updateUser, deactivateUser}
