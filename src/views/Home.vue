@@ -80,12 +80,14 @@ export default {
         </div>
 
         <div class="button-container">
-          <el-button class="button4" style="width: 200px; height: 100px; border-radius: 50px;">
+          <RouterLink :to="{ name: 'modifyarequest' }">
+          <el-button class="button3" style="width: 200px; height: 100px; border-radius: 50px;" >
             <el-icon style="font-size: 65px; font-weight: bolder;">
               <EditPen />
             </el-icon>
           </el-button>
-            <span class="button-text">Modify a Request</span>
+          </RouterLink>
+          <span class="button-text">Modify Request</span>
         </div>
       </div>
 

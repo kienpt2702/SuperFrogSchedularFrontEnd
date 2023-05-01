@@ -43,6 +43,7 @@ const router = createRouter({
         { path: 'price', name: 'price', component: Price },
         { path: 'request', name: 'request', component: Request },
         { path: 'range', name: 'range', component: Range },
+        { path: 'modifyarequest', name: 'modifyarequest', component: modifyRequest},
       ],
     },
     {
