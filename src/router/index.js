@@ -12,7 +12,7 @@ import DirectorPageforSS from '@/layout/DirectorPageforSS.vue';
 import Price from '@/views/hometabs/price.vue';
 import Request from '@/views/hometabs/request.vue';
 import Range from '@/views/hometabs/range.vue';
-import modifyarequest from '@/views/hometabs/modifyarequest.vue';
+import Modifyarequest from '@/views/hometabs/modifyarequest.vue';
 
 import newStudent from '@/views/tabs/newStudent.vue';
 import allStudents from '@/views/tabs/AllStudents.vue';
@@ -36,8 +36,7 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      component: FrontPage,
-      redirect: Home, // FrontOffice will be rendered in App's <vue-router />
+      component: FrontPage,  // FrontOffice will be rendered in App's <vue-router />
       children: [
         // children will be rendered in Front component's <vue-router />
         { path: 'home', name: 'home', component: Home },
@@ -45,7 +44,7 @@ const router = createRouter({
         { path: 'price', name: 'price', component: Price },
         { path: 'request', name: 'request', component: Request },
         { path: 'range', name: 'range', component: Range },
-        { path: 'modifyarequest', name: 'modifyarequest', component: modifyarequest},
+        { path: 'modifyarequest', name: 'modifyarequest', component: Modifyarequest},
       ],
     },
     {
