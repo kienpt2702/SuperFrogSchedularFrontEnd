@@ -1,6 +1,7 @@
 <script>
 import { RouterLink } from 'vue-router';
 import axios from 'axios'
+import {login} from '../utils/userLoginUtils.js'
 // import { eventBus } from './eventBus.js';
 export default {
     data() {
@@ -11,7 +12,7 @@ export default {
         };
     },
     methods: {
-        handleSubmit() {
+        async handleSubmit() {
             // Make an HTTP request to the authentication service to validate the user's credentials
             // For example:
             // axios.post('/login', { username: this.username, password: this.password })
@@ -26,12 +27,17 @@ export default {
             //     this.error = 'Invalid username or password';
             //   });
 
-            if (this.email === "admin@tcu.edu") {
-                this.$router.push({ name: 'director' });
-            } else if (this.email === "superfrogstudent@tcu.edu") {
-                this.$router.push({ name: 'viewsuperfrogstudent' });
-            } else {
-                this.$router.push({ name: 'home' });
+            try {
+                const user = await login({
+                username: this.email,
+                password: this.password
+            })
+
+
+            }
+
+            catch(err) {
+                console.log(err);
             }
         }
     }

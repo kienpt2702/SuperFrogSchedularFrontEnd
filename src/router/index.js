@@ -34,15 +34,15 @@ const router = createRouter({
   history: createWebHistory(), // createWebHistory('tcu')
   routes: [
     {
-      path: '/front',
+      path: '/',
       component: FrontPage, // FrontOffice will be rendered in App's <vue-router />
       children: [
         // children will be rendered in Front component's <vue-router />
-        { path: '/', name: 'home', component: Home },
-        { path: '/', name: 'login', component: Login },
-        { path: '/', name: 'price', component: Price },
-        { path: '/', name: 'request', component: Request },
-        { path: '/', name: 'range', component: Range },
+        { path: 'home', name: 'home', component: Home },
+        { path: 'auth/login', name: 'login', component: Login },
+        { path: 'price', name: 'price', component: Price },
+        { path: 'request', name: 'request', component: Request },
+        { path: 'range', name: 'range', component: Range },
       ],
     },
     {
@@ -104,8 +104,8 @@ const router = createRouter({
       ],
     },
     {
-      path: '/viewsuperfrogstudent',
-      name: 'viewsuperfrogstudent',
+      path: '/superfrogstudent',
+      name: 'superfrogstudent',
       component: DirectorPageforSS, // FrontOffice will be rendered in App's <vue-router />
       children: [
         // children will be rendered in Front component's <vue-router />

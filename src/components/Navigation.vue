@@ -19,7 +19,7 @@ import { RouterLink } from 'vue-router';
     >
     -->
     <RouterLink :to="{ name: 'director' }">Director Page</RouterLink>
-    <RouterLink :to="{ name: 'viewsuperfrogstudent' }">Director Page</RouterLink>
+    <RouterLink :to="{ name: 'superfrogstudent' }">Director Page</RouterLink>
   </div>
 </template>
 
