@@ -6,8 +6,8 @@ const api = axios.create();
 api.interceptors.request.use(
     (config) => {
         // add the base URL to the request
-        // config.baseURL = 'https://superfrogscheduler.up.railway.app/api/v1';
-        config.baseURL = 'http://localhost:8080/api/v1'
+        config.baseURL = 'https://superfrogscheduler.up.railway.app/api/v1';
+        // config.baseURL = 'http://localhost:8080/api/v1'
 
         const token = cacheUtils.get('login_token')?.token;
 
