@@ -12,7 +12,7 @@
       <el-table-column prop="phoneNumber" label="Phone Number" sortable align="center"/>
       <el-table-column prop="address" label="Address" align="center"/>
 <!--      last column, contain filter, edit, deactivate button-->
-      <el-table-column align="right">
+      <el-table-column align="left">
         <template #header>
           <el-popover placement="right" :width="400" trigger="click">
             <template #reference>
@@ -20,6 +20,7 @@
                 Filter
               </el-button>
             </template>
+            <StudentFilterForm @user-filter="handleUserFilter"></StudentFilterForm>
 
           </el-popover>
         </template>
@@ -31,7 +32,7 @@
               Edit
             </el-button>
 
-            <el-button type="danger" size="small" @click="">Deactivate</el-button>
+            <el-button type="danger" size="small" @click="">Deact</el-button>
           </el-form-item>
         </template>
       </el-table-column>
@@ -56,8 +57,13 @@
 <script>
 import axios from 'axios';
 import {getAllUsers} from "@/apis/userApis.js";
+import StudentFilterForm from "@/components/StudentFilterForm.vue";
 
 export default {
+  components: {
+    StudentFilterForm
+  },
+
   data() {
     return {
       userLists: [], // your data here
@@ -66,6 +72,7 @@ export default {
       totalPages: 1,
       sortDirection: 'ASC',
       sortBy: 'firstName',
+      userFilter: {},
       isLoading: true,
     };
   },
@@ -95,6 +102,7 @@ export default {
 
     handlePageChange(currentPage) {
       this.currentPage = currentPage;
+      this.fetchData(this.searchParams);
     },
 
     handleSortChange(newSort) {
@@ -103,7 +111,9 @@ export default {
       this.fetchData(this.searchParams);
     },
 
-    handlePaginationChange() {
+    handleUserFilter(user) {
+      this.userFilter = {...user};
+      this.currentPage = 1;
       this.fetchData(this.searchParams);
     }
   },
@@ -125,24 +135,11 @@ export default {
         pageSize: this.pageSize,
         totalPages: this.totalPages,
         sortDirection: this.sortDirection,
-        sortBy: this.sortBy
+        sortBy: this.sortBy,
+        ...this.userFilter
       }
     }
   },
-  // not set watch for both sortDirection and sortBy as if both changes, handleChanges will be
-  // called twice
-  // if any change, fetch new data
-  watch: {
-    currentPage() {
-      this.handlePaginationChange();
-    },
-    pageSize() {
-      this.handlePaginationChange();
-    },
-    totalPages() {
-      this.handlePaginationChange();
-    }
-  }
 };
 </script>
 
