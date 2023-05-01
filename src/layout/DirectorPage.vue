@@ -10,6 +10,8 @@ export default {
       requestLinks: [
         { name: 'newRequest', title: 'Add a New Request' },
         { name: 'allRequests', title: 'View All Requests' },
+        { name: 'modifyRequest', title: 'Modify Request'}, //just added
+        { name: 'signupRequest', title: 'Sign Up Request'},
       ],
       reportLinks: [
         { name: 'addPaymentReport', title: 'Create a Payment Report' },
