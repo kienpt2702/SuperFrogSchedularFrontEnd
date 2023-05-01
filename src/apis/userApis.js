@@ -15,4 +15,12 @@ const loginUser = async (loginInfo) => {
     return res;
 }
 
-export {createUser, loginUser}
+const getAllUsers= async (searchParams) => {
+    const res = await api.get(`${endpoint}`, {
+        params: searchParams
+    });
+
+    return res.data;
+}
+
+export {createUser, loginUser, getAllUsers}
