@@ -16,6 +16,9 @@ export async function login(loginInfo) {
     const roles = res.data.userInfo.roles;
     const routeName = roles.includes('admin') ? 'director' : 'superfrogstudent';
     router.push({name: routeName});
+    console.log(res.data.userInfo);
+
+    // cache.get('login_token')
 
 
     return res;
@@ -24,5 +27,5 @@ export async function login(loginInfo) {
 export function logout() {
     cache.remove('login_token');
 // redirect to root page
-    router.push('/home');
+    router.push('/');
 }

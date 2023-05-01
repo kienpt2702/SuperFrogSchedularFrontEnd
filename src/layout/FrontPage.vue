@@ -1,13 +1,13 @@
 <script>
-import Navigation from '@/components/Navigation.vue';
+import Navbar from '@/components/Navbar.vue';
 import { RouterView } from 'vue-router';
 export default {
-  components: { Navigation },
+  components: { Navbar },
 };
 </script>
 
 <template>
-  <Navigation class="navigation"></Navigation>
+  <!-- <Navbar class="navigation"></Navbar> -->
   <div class="front-view">
     <RouterView></RouterView>
   </div>
@@ -15,7 +15,7 @@ export default {
 
 <style lang="scss" scoped>
 .navigation {
-  margin-bottom: 20px;
+  margin-top: 20px;
 }
 .front-view {
   background-color: #f3f3f3;
