@@ -1,8 +1,8 @@
 <script>
 import { ElButton } from 'element-plus';
 import ElIcon from 'element-plus';
-import { RouterView } from 'vue-router';
-
+import { RouterLink } from 'vue-router';
+// import { eventBus } from './eventBus.js';
 export default {
   data() {
     return {
@@ -11,9 +11,15 @@ export default {
         { name: 'range', title: 'Range' },
         { name: 'request', title: 'Request' },
         { name: 'modifyarequest', title: 'Modify A Request' },
-      ]
+      ],
+      loggedIn: false,
     }
   },
+  // mounted() {
+  //   eventBus.$on('loggedIn', value => {
+  //     this.loggedIn = value;
+  //   });
+  // },
   methods: {
     // simulate router-link's "to" functionality
     push(link) {
@@ -39,48 +45,38 @@ export default {
         </div>
       </div>
 
-      <!-- <div class="button-container">
-        <div v-for="(link, index) of mainLinks" style="display: inline;" :key="index" @click="push(link)">
-          <el-button class="button1" style="width: 200px; height: 100px; border-radius: 50px;">
-            <el-icon style="font-size: 60px; font-weight: bolder;">
-              <Money />
-            </el-icon><br>
-            <p class="button-text">{{ link.title }}</p>
-          </el-button>
-        </div>
-        
-        <main>
-          <RouterView />
-        </main>
-      </div> -->
-      
-
       <div class="buttons">
         <div class="button-container">
-          <el-button class="button1" style="width: 200px; height: 100px; border-radius: 50px; display: block;">
-            <el-icon style="font-size: 65px; font-weight: bolder;">
-              <Money />
-            </el-icon>
-          </el-button>
-            <p class="button-text">Pricing</p>
+          <RouterLink :to="{ name: 'price' }">
+            <el-button class="button1" style="width: 200px; height: 100px; border-radius: 50px; display: block;">
+              <el-icon style="font-size: 65px; font-weight: bolder;">
+                <Money />
+              </el-icon>
+            </el-button>
+          </RouterLink>
+          <p class="button-text">Pricing</p>
         </div>
 
         <div class="button-container">
-          <el-button class="button2 banner" style="width: 200px; height: 100px; border-radius: 50px;"> 
-            <el-icon style="font-size: 65px; font-weight: bolder;">
-              <Wallet />
-            </el-icon> 
-          </el-button>
+          <RouterLink :to="{ name: 'range' }">
+            <el-button class="button2" style="width: 200px; height: 100px; border-radius: 50px;"> 
+              <el-icon style="font-size: 65px; font-weight: bolder;">
+                <Wallet />
+              </el-icon> 
+            </el-button>
+          </RouterLink>
           <span class="button-text">Range</span>
         </div>
 
         <div class="button-container">
+          <RouterLink :to="{ name: 'request' }">
           <el-button class="button3" style="width: 200px; height: 100px; border-radius: 50px;" >
             <el-icon style="font-size: 65px; font-weight: bolder;">
               <Calendar />
             </el-icon>
           </el-button>
-            <span class="button-text">Request</span>
+          </RouterLink>
+          <span class="button-text">Request</span>
         </div>
 
         <div class="button-container">
@@ -90,6 +86,16 @@ export default {
             </el-icon>
           </el-button>
             <span class="button-text">Modify a Request</span>
+        </div>
+      </div>
+
+      <div>
+        <!-- <p>{{ loggedIn }}</p> -->
+        <div v-if="loggedIn">
+          <p style="color: aqua">Welcome, Drake Do!</p>
+        </div>
+        <div  v-else style="display: flex; justify-content: center; margin-top: 50px;">
+          <RouterLink :to="{ name: 'login' }"><p class="login-text">Staff Login here!</p></RouterLink>
         </div>
       </div>
     </div>
@@ -168,5 +174,13 @@ export default {
     color: white;
     text-align: center;
     max-width: 200px; 
+  }
+  .login-text {
+    color: white;
+    font-size: 30px;
+  }
+  .login-text:hover {
+    color: aqua;
+    text-decoration: underline;
   }
   </style>
