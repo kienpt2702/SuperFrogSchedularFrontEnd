@@ -77,7 +77,6 @@ export default {
     flex-direction: column;
     background: #4d1979;
     padding: 10px;
-    justify-content: center;
     div, h2 {
       margin-bottom: 20px;
       color: #fff;
