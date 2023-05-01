@@ -45,7 +45,7 @@
             <td>{{ requests.status }}</td>
             <td>
               <button v-if="!requests.assignedSuperFrogStudent" @click="signupRequests(requests)">SIGN UP</button>
-              <button v-if="requests.assignedSuperFrogStudent">REASSIGN</button>
+              <button v-if="requests.assignedSuperFrogStudent" @click="reAssign(requests)">REASSIGN</button>
               <button class="cancel" @click="cancelRequests(requests)">CANCEL</button>
            
             </td>

@@ -12,6 +12,7 @@ import DirectorPageforSS from '@/layout/DirectorPageforSS.vue';
 import Price from '@/views/hometabs/price.vue';
 import Request from '@/views/hometabs/request.vue';
 import Range from '@/views/hometabs/range.vue';
+import modify from '@views/hometabs/modifyarequest.vue';
 
 import newStudent from '@/views/tabs/newStudent.vue';
 import allStudents from '@/views/tabs/AllStudents.vue';
@@ -43,7 +44,7 @@ const router = createRouter({
         { path: 'price', name: 'price', component: Price },
         { path: 'request', name: 'request', component: Request },
         { path: 'range', name: 'range', component: Range },
-        { path: 'modifyarequest', name: 'modifyarequest', component: modifyRequest},
+        { path: 'modify', name: 'modifyarequest', component: modifyarequest},
       ],
     },
     {

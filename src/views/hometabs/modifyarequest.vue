@@ -102,11 +102,15 @@
       </form>
     </div>
     
+        <div class="backholder">
+        <RouterLink :to="{ name: 'home' }"><p class="backtext">Back to Home Page</p></RouterLink>
+         </div>
   
   </template>
   
   
   <script>
+  import { RouterLink } from 'vue-router';
   import axios from "axios";
   export default {
     methods: {
