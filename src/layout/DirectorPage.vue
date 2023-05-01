@@ -1,6 +1,5 @@
 <script>
 import { RouterView } from 'vue-router';
-
 export default {
   data() {
     return {
@@ -25,9 +24,6 @@ export default {
       ],
     };
   },
-  components: {
-
-  },
   methods: {
     // simulate router-link's "to" functionality
     push(link) {
@@ -39,7 +35,6 @@ export default {
 </script>
 
 <template>
-
   <div class="layout-member">
     <nav>
       <img src="@/images/img.png"/>
