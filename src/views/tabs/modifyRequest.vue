@@ -1,10 +1,13 @@
 <template>
-
-  
   <div class="form-container">
-    <h2 class="form-header">Event Registration Form</h2>
+    <h2 class="form-header">Event Modification Form</h2>
+    
     <form @submit.prevent="submitForm">
-      
+        <div>
+            <label for="searchId">Request ID:</label>
+            <input type="text" id="searchId" name="searchId" placeholder="Input ID..." />
+        </div>
+
       <div class="flex-container">
         <div class="flex-item">
           <label for="event-title">Event Title:</label>
@@ -93,8 +96,7 @@
       </div>
       
   
-      <input type="submit" value="Submit">
-      <div class="requestId"></div>
+      <input type="submit" value="Submit Changes">
 
     </form>
   </div>
@@ -108,6 +110,13 @@ import axios from "axios";
 export default {
   methods: {
     async submitForm() {
+
+
+        
+
+
+
+
       const origin1 = 'Amon G. Carter Stadium 2850 Stadium Drive Fort Worth, TX 76109';
       // Retrieve the values of the input fields
       const address = document.getElementById("event-address").value;
@@ -131,6 +140,7 @@ export default {
             const distanceInMiles = (distanceInKm / 1.609344).toFixed(2);
             console.log(distanceInMiles);
             const requestData = {
+              id: document.querySelector("#searchId").value,
               eventType: document.querySelector("#event-type").value,
               address: document.querySelector("#event-address").value,
               eventDate: document.querySelector("#event-date").value,
@@ -148,18 +158,13 @@ export default {
 
             // send the form data to the API endpoint
             axios
-              .post("http://localhost:8080/api/v1/requests", requestData)
+              .put(`http://localhost:8080/api/v1/requests/${requestData.id}`, requestData)
               .then(response => {
                 if (response.status === 200) {
-                  alert("Form submitted successfully!");
+                  alert("Update submitted successfully!");
                   console.log(response.data);
-
-
-                  const requestId = response.data.data.id;
-                  document.querySelector(".requestId").innerHTML = requestId;
-
                 } else {
-                  alert("Form submission failed.");
+                  alert("Update submission failed.");
                   console.error(response.data);
                 }
                 
