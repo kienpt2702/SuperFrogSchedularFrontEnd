@@ -1,7 +1,12 @@
 <template>
+  <div>
+    <h1>Add New Student</h1>
+    <hr>
+  </div>
+
   <StudentForm ref="studentForm"></StudentForm>
 
-  <el-row style="border: 1px solid red">
+  <el-row>
     <el-col :xs="24">
       <el-form-item>
         <el-button class="btn" size="large" loading-icon="Eleme" :loading="isLoading" color="#626aef" @click="submitForm">
