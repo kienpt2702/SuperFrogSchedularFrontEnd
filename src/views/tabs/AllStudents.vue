@@ -27,12 +27,21 @@
 
 
         <template #default="scope">
-          <el-form-item>
-            <el-button size="small" color="#626aef" @click="">
-              Edit
+          <el-popover placement="right" :width="400" trigger="click">
+            <template #reference>
+              <el-button size="small" color="#626aef">
+                Edit
+              </el-button>
+            </template>
+            <StudentForm ref="editForm" :student="scope.row"></StudentForm>
+            <el-button size="large" color="#626aef" @click="editStudent(scope.row)">
+              Apply
             </el-button>
 
-            <el-button type="danger" size="small" @click="">Deact</el-button>
+          </el-popover>
+          <el-form-item>
+
+            <el-button type="danger" size="small" @click="deactivate(scope.row)">Deactivate</el-button>
           </el-form-item>
         </template>
       </el-table-column>
@@ -56,12 +65,14 @@
 
 <script>
 import axios from 'axios';
-import {getAllUsers} from "@/apis/userApis.js";
+import {deactivateUser, getAllUsers, updateUser} from "@/apis/userApis.js";
 import StudentFilterForm from "@/components/StudentFilterForm.vue";
+import StudentForm from "@/components/StudentForm.vue";
 
 export default {
   components: {
-    StudentFilterForm
+    StudentFilterForm,
+    StudentForm
   },
 
   data() {
@@ -82,6 +93,18 @@ export default {
   },
 
   methods: {
+    deactivate(user) {
+      const userId = user.id;
+      deactivateUser(userId);
+    },
+
+    editStudent(user) {
+      const userId = user.id;
+      const updateInfo = this.$refs.editForm.getSubmitInfo();
+
+      updateUser(userId, updateInfo).then(res => console.log(res))
+    },
+
     async fetchData(searchParam) {
       // your code to fetch the data here
       // axios

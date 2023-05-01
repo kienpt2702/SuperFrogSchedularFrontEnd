@@ -36,7 +36,7 @@
       </el-col>
 
       <el-col :xs="12" :sm="6">
-        <el-form-item label="Suite/Apt" prop="suite">
+        <el-form-item label="Suite" prop="suite">
           <el-input v-model.trim="user.suite"></el-input>
         </el-form-item>
       </el-col>
@@ -57,7 +57,7 @@
       </el-col>
 
       <el-col :xs="12" :sm="6">
-        <el-form-item label="Postal" prop="postal">
+        <el-form-item label="ZIP" prop="postal">
           <el-input v-model.number.trim="user.postal"></el-input>
         </el-form-item>
       </el-col>
@@ -69,6 +69,7 @@
 
 <script>
 export default {
+
   data() {
     return {
       user: {

@@ -17,7 +17,8 @@
     </el-form-item>
 
     <el-form-item>
-      <el-button type="primary" @click="onApply">Apply</el-button>
+      <el-button color="#626aef" type="primary" @click="onApply">Apply</el-button>
+      <el-button @click="onReset">Reset</el-button>
     </el-form-item>
   </el-form>
 </template>
@@ -80,6 +81,12 @@ export default {
           console.log('Form validation failed')
         }
       })
+    },
+
+    onReset() {
+      this.$refs.form.resetFields();
+      console.log(this.getSubmitInfo())
+      this.$emit('user-filter', this.getSubmitInfo());
     }
   }
 }
