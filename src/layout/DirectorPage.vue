@@ -1,5 +1,6 @@
 <script>
 import { RouterView } from 'vue-router';
+import TopNav from '../components/TopNav.vue';
 export default {
   data() {
     return {
@@ -24,6 +25,9 @@ export default {
       ],
     };
   },
+  components: {
+    TopNav // Add the TopNav component to the components object
+  },
   methods: {
     // simulate router-link's "to" functionality
     push(link) {
@@ -35,6 +39,7 @@ export default {
 </script>
 
 <template>
+  <TopNav />
   <div class="layout-member">
     <nav>
       <img src="@/images/img.png"/>
@@ -60,9 +65,9 @@ export default {
         {{ link.title }}
       </h2>
     </nav>
-      <main>
-        <RouterView />
-      </main>
+    <main>
+      <RouterView />
+    </main>
   </div>
 </template>
 
@@ -72,6 +77,7 @@ export default {
   grid-template-columns: repeat(12, 1fr);
   background-color: #f3f3f3;
   nav {
+    height: 100vh;
     grid-column: span 3;
     display: flex;
     flex-direction: column;

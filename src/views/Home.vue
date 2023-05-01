@@ -32,13 +32,18 @@ export default {
 
 <template>
     <div class="homepage">
+      <div style="display: flex; justify-content: end;">
+        <div class="loginNav">
+          <RouterLink :to="{ name: 'login' }"><p class="login-text">Staff Login</p></RouterLink>
+        </div>
+      </div>
+      
       <div class="header">
-        <h1>SuperFrog Scheduler</h1>
+        <h1 class="title">SuperFrog Scheduler</h1>
         <div class="desc">
-        <p>Add TCU Spirit to your event 
-          <br> Request SuperFrog, TCU Cheerleaders, & Showgirls to your wedding, grad party,  and more!
-        </p>
-        <p></p>
+          <p>Add TCU Spirit to your event 
+            <br> Request SuperFrog, TCU Cheerleaders, & Showgirls to your wedding, grad party,  and more!
+          </p>
         </div>
         <div>
           <img src="./SuperFrog.jpg" alt="Image" class="ima">
@@ -89,15 +94,14 @@ export default {
         </div>
       </div>
 
-      <div>
-        <!-- <p>{{ loggedIn }}</p> -->
+      <!-- <div>
         <div v-if="loggedIn">
           <p style="color: aqua">Welcome, Drake Do!</p>
         </div>
         <div  v-else style="display: flex; justify-content: center; margin-top: 50px;">
           <RouterLink :to="{ name: 'login' }"><p class="login-text">Staff Login here!</p></RouterLink>
         </div>
-      </div>
+      </div> -->
     </div>
   </template>
   
@@ -119,6 +123,8 @@ export default {
     padding: 20px;
     top:0;
     left: 0;
+
+    flex-wrap: wrap;
   }
   .header {
     position: relative;
@@ -127,16 +133,32 @@ export default {
     margin-bottom: 10px;
     color: white; 
   }
+
+  .loginNav {
+    display: flex;
+    justify-content: end;
+    padding: 15px;
+  }
+
+  .title {
+    margin-top: 0; 
+    padding-left: 15px; 
+    margin-bottom: 10px;
+  }
+
   .desc{
     width:50%;
+    padding-left: 30px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-style: italic;
   }
   .ima {
     position: absolute;
     top: 10px;
-    right: 25px;
+    right: 80px;
     max-width: 25%;
-    height: 250px;
-    width: 250px;
+    height: 270px;
+    width: 270px;
     border-radius: 200px;
     border: 3px solid white;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
@@ -145,28 +167,14 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-  button {
-      margin: 30px;
-      margin-top: 150px;
-      padding: 20px;
-      width: 150px;
-      height: 100px;
-      border: none;
-      background-size: contain;
-      background-repeat: no-repeat;
-      background-position: center center;
-      color: white;
-      border-radius: 20px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-end;
+    margin-top: 150px;
   }
   .button-container {
     display: flex;
     flex-direction: column; 
     align-items: center;
+    margin-left: 10px;
+    margin-right: 10px;
   }
   .button-text {
     font-size: 16px;
@@ -177,7 +185,8 @@ export default {
   }
   .login-text {
     color: white;
-    font-size: 30px;
+    font-size: 27px;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   }
   .login-text:hover {
     color: aqua;

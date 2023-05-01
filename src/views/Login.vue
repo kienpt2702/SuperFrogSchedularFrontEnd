@@ -29,14 +29,10 @@ export default {
 
             try {
                 const user = await login({
-                username: this.email,
-                password: this.password
-            })
-
-
-            }
-
-            catch(err) {
+                    username: this.email,
+                    password: this.password
+                })
+            } catch(err) {
                 console.log(err);
             }
         }
