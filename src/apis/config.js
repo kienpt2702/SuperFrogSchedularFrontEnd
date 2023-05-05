@@ -30,7 +30,7 @@ api.interceptors.response.use(
     },
     (error) => {
         const response = error?.response?.data; // use optional chaining to access error response data
-        return Promise.reject(response || error);
+        return Promise.reject(response);
     }
 );
 

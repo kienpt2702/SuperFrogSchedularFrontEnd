@@ -64,7 +64,6 @@
 </template>
 
 <script>
-import axios from 'axios';
 import {deactivateUser, getAllUsers, updateUser} from "@/apis/userApis.js";
 import StudentFilterForm from "@/components/StudentFilterForm.vue";
 import StudentForm from "@/components/StudentForm.vue";
@@ -101,8 +100,16 @@ export default {
     editStudent(user) {
       const userId = user.id;
       const updateInfo = this.$refs.editForm.getSubmitInfo();
+      console.log(user)
 
-      updateUser(userId, updateInfo).then(res => console.log(res))
+      // updateUser(userId, updateInfo).then(res => console.log(res))
+
+      this.$router.push({
+        name: 'studentProfile',
+        params: {
+          id: userId
+        }
+      })
     },
 
     async fetchData(searchParam) {

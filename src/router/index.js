@@ -25,6 +25,7 @@ import addPaymentReport from '@/views/tabs/Reports/addPaymentReport.vue';
 import addPerformanceReport from '@/views/tabs/Reports/addPerformanceReport.vue';
 
 import viewSSrequest from '@/views/tabs/viewSSrequest.vue';
+import studentInfo from "@/views/tabs/StudentInfo.vue";
 
 
 
@@ -60,6 +61,11 @@ const router = createRouter({
           path: 'allStudents',
           name: 'allStudents',
           component: allStudents,
+        },
+        {
+          path: 'studentProfile/:id',
+          name: 'studentProfile',
+          component: studentInfo
         },
         {
           path: 'newRequest',
