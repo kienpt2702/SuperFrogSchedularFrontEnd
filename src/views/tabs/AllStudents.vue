@@ -27,21 +27,13 @@
 
 
         <template #default="scope">
-          <el-popover placement="right" :width="400" trigger="click">
-            <template #reference>
-              <el-button size="small" color="#626aef">
-                Edit
-              </el-button>
-            </template>
-            <StudentForm ref="editForm" :student="scope.row"></StudentForm>
-            <el-button size="large" color="#626aef" @click="editStudent(scope.row)">
-              Apply
-            </el-button>
-
-          </el-popover>
           <el-form-item>
-
-            <el-button type="danger" size="small" @click="deactivate(scope.row)">Deactivate</el-button>
+            <el-button size="small" color="#626aef" @click="viewStudent(scope.row)">
+              View Profile
+            </el-button>
+          </el-form-item>
+          <el-form-item>
+            <el-button type="danger" size="small" @click="deactivateUser(scope.row)">Deactivate</el-button>
           </el-form-item>
         </template>
       </el-table-column>
@@ -64,9 +56,10 @@
 </template>
 
 <script>
-import {deactivateUser, getAllUsers, updateUser} from "@/apis/userApis.js";
+import {deactivateUser, getAllUsers} from "@/apis/userApis.js";
 import StudentFilterForm from "@/components/StudentFilterForm.vue";
 import StudentForm from "@/components/StudentForm.vue";
+import {ElNotification} from "element-plus";
 
 export default {
   components: {
@@ -92,17 +85,31 @@ export default {
   },
 
   methods: {
-    deactivate(user) {
-      const userId = user.id;
-      deactivateUser(userId);
+    async deactivateUser(user) {
+      this.isLoading = true;
+
+      try {
+        const res = await deactivateUser(user.id);
+        this.message = res.message;
+        this.messageType = 'success';
+      }
+
+      catch (e) {
+        this.message = e.code ? e.message : 'An error has occurred, please try again!';
+        this.messageType = 'error';
+      }
+
+      ElNotification({
+        title: this.messageType === 'success' ? 'Success' : 'Oops!',
+        message: this.message,
+        type: this.messageType,
+      })
+
+      this.isLoading = false;
     },
 
-    editStudent(user) {
+    viewStudent(user) {
       const userId = user.id;
-      const updateInfo = this.$refs.editForm.getSubmitInfo();
-      console.log(user)
-
-      // updateUser(userId, updateInfo).then(res => console.log(res))
 
       this.$router.push({
         name: 'studentProfile',
