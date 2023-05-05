@@ -82,7 +82,7 @@ export default {
   methods: {
     getRequests() {
       axios
-        .get('superfrogscheduler.up.railway.app/api/v1/requests')
+        .get('https://superfrogscheduler.up.railway.app/api/v1/requests')
         .then(response => {
           this.requests = response.data.data;
           this.showPrevButton = false;

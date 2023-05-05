@@ -3,13 +3,13 @@
     <el-row class="row" gutter="50">
       <el-col :xs="24" :sm="12">
         <el-form-item label="First Name" prop="firstName">
-          <el-input v-model.trim="user.firstName"></el-input>
+          <el-input v-model.trim.lazy="user.firstName"></el-input>
         </el-form-item>
       </el-col>
 
       <el-col :xs="24" :sm="12">
         <el-form-item label="Last Name" prop="lastName">
-          <el-input v-model.trim="user.lastName"></el-input>
+          <el-input v-model.trim.lazy="user.lastName"></el-input>
         </el-form-item>
       </el-col>
     </el-row>
@@ -17,13 +17,13 @@
     <el-row gutter="50">
       <el-col :xs="24" :sm="12">
         <el-form-item label="Email" prop="email">
-          <el-input v-model.trim="user.email" placeholder="example@email.com"></el-input>
+          <el-input v-model.trim.lazy="user.email" placeholder="example@email.com"></el-input>
         </el-form-item>
       </el-col>
 
       <el-col :xs="24" :sm="12">
         <el-form-item label="Phone" prop="phoneNumber">
-          <el-input v-model.number.trim="user.phoneNumber" placeholder="(xxx) xxx-xxxx"></el-input>
+          <el-input v-model.number.trim.lazy="user.phoneNumber" placeholder="(xxx) xxx-xxxx"></el-input>
         </el-form-item>
       </el-col>
     </el-row>
@@ -31,7 +31,7 @@
     <el-row gutter="50">
       <el-col :xs="24" :sm="12">
         <el-form-item label="Street" prop="street">
-          <el-input v-model="user.street"></el-input>
+          <el-input v-model.lazy="user.street"></el-input>
         </el-form-item>
       </el-col>
 
@@ -69,19 +69,25 @@
 
 <script>
 export default {
+  props: {
+    initialUser: {
+      type: Object
+    }
+  },
 
   data() {
+    console.log(this.initialUser)
     return {
       user: {
-        email: '',
-        firstName: '',
-        lastName: '',
-        phoneNumber: '',
-        street: '',
-        suite: '',
-        city: '',
-        state: '',
-        postal: '',
+        email: this.initialUser ? this.initialUser.email : '',
+        firstName: this.initialUser ? this.initialUser.firstName : '',
+        lastName: this.initialUser ? this.initialUser.lastName : '',
+        phoneNumber: this.initialUser ? this.initialUser.phoneNumber : '',
+        street: this.initialUser ? this.initialUser.street : '',
+        suite: this.initialUser ? this.initialUser.suite : '',
+        city: this.initialUser ? this.initialUser.city : '',
+        state: this.initialUser ? this.initialUser.state : '',
+        postal: this.initialUser ? this.initialUser.postal : '',
       },
       rules: {
         email: [

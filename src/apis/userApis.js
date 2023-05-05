@@ -15,7 +15,7 @@ const loginUser = async (loginInfo) => {
     return res;
 }
 
-const getAllUsers= async (searchParams) => {
+const getAllUsers = async (searchParams) => {
     const res = await api.get(`${endpoint}`, {
         params: searchParams
     });
@@ -23,24 +23,22 @@ const getAllUsers= async (searchParams) => {
     return res.data;
 }
 
-const updateUser = async (userId, info) => {
-    try {
-        const res = await api.put(`${endpoint}/${userId}`, info);
+const getUserById = async (userId) => {
+    const res = await api.get(`${endpoint}/${userId}`);
 
-        return res;
-    } catch (err) {
-        console.log(false)
-    }
+    return res.data;
+}
+
+const updateUser = async (userId, info) => {
+    const res = await api.put(`${endpoint}/${userId}`, info);
+
+    return res;
 }
 
 const deactivateUser = async (userId) => {
-    try {
-        const res = await api.delete(`${endpoint}/${userId}`);
+    const res = await api.delete(`${endpoint}/${userId}`);
 
-        return res;
-    } catch (err) {
-        console.log(false)
-    }
+    return res;
 }
 
-export {createUser, loginUser, getAllUsers, updateUser, deactivateUser}
+export {createUser, loginUser, getAllUsers, getUserById, updateUser, deactivateUser}
